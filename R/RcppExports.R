@@ -85,3 +85,15 @@ zzz2022_glht_2cnrt_cpp <- function(Y, X, C, n, p) {
     .Call(`_HDNRA_zzz2022_glht_2cnrt_cpp`, Y, X, C, n, p)
 }
 
+wz2026_glhtbf_2cnrt_cpp <- function(Y, tG, n, p) {
+    .Call(`_HDNRA_wz2026_glhtbf_2cnrt_cpp`, Y, tG, n, p)
+}
+
+random_integration_test_cpp <- function(Y, B, O, A, n, p) {
+    .Call(`_HDNRA_random_integration_test_cpp`, Y, B, O, A, n, p)
+}
+
+cao2024_scale_invariant_cpp <- function(Y, B, n, p) {
+    .Call(`_HDNRA_cao2024_scale_invariant_cpp`, Y, B, n, p)
+}
+

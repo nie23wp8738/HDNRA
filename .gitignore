@@ -6,3 +6,19 @@ src/*.o
 src/*.so
 src/*.dll
 docs
+
+# macOS metadata
+.DS_Store
+__MACOSX/
+
+# R session files
+.RData
+.Rhistory
+
+# RStudio
+.Rproj.user/
+
+# R package build/check artifacts
+*.Rcheck/
+HDNRA.Rcheck/
+*.tar.gz

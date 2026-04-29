@@ -286,6 +286,50 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// wz2026_glhtbf_2cnrt_cpp
+arma::vec wz2026_glhtbf_2cnrt_cpp(List Y, const arma::mat& tG, const arma::vec& n, int p);
+RcppExport SEXP _HDNRA_wz2026_glhtbf_2cnrt_cpp(SEXP YSEXP, SEXP tGSEXP, SEXP nSEXP, SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type Y(YSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type tG(tGSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(wz2026_glhtbf_2cnrt_cpp(Y, tG, n, p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// random_integration_test_cpp
+arma::vec random_integration_test_cpp(const Rcpp::List& Y, const arma::vec& B, const arma::vec& O, const arma::vec& A, const arma::vec& n, int p);
+RcppExport SEXP _HDNRA_random_integration_test_cpp(SEXP YSEXP, SEXP BSEXP, SEXP OSEXP, SEXP ASEXP, SEXP nSEXP, SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type Y(YSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type B(BSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type O(OSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(random_integration_test_cpp(Y, B, O, A, n, p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cao2024_scale_invariant_cpp
+arma::vec cao2024_scale_invariant_cpp(const Rcpp::List& Y, const arma::vec& B, const arma::vec& n, int p);
+RcppExport SEXP _HDNRA_cao2024_scale_invariant_cpp(SEXP YSEXP, SEXP BSEXP, SEXP nSEXP, SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type Y(YSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type B(BSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(cao2024_scale_invariant_cpp(Y, B, n, p));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_HDNRA_bs1996_ts_nabt_cpp", (DL_FUNC) &_HDNRA_bs1996_ts_nabt_cpp, 2},
@@ -309,6 +353,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_HDNRA_zz2022_glht_3cnrt_cpp", (DL_FUNC) &_HDNRA_zz2022_glht_3cnrt_cpp, 4},
     {"_HDNRA_zz2022_glhtbf_3cnrt_cpp", (DL_FUNC) &_HDNRA_zz2022_glhtbf_3cnrt_cpp, 4},
     {"_HDNRA_zzz2022_glht_2cnrt_cpp", (DL_FUNC) &_HDNRA_zzz2022_glht_2cnrt_cpp, 5},
+    {"_HDNRA_wz2026_glhtbf_2cnrt_cpp", (DL_FUNC) &_HDNRA_wz2026_glhtbf_2cnrt_cpp, 4},
+    {"_HDNRA_random_integration_test_cpp", (DL_FUNC) &_HDNRA_random_integration_test_cpp, 6},
+    {"_HDNRA_cao2024_scale_invariant_cpp", (DL_FUNC) &_HDNRA_cao2024_scale_invariant_cpp, 4},
     {NULL, NULL, 0}
 };
 

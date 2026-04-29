@@ -9,7 +9,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "100%",
+  eval = FALSE
 )
 ```
 
@@ -21,17 +22,18 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-The R package **HDNRA** includes the latest methods based on normal-reference approach to test the equality of the mean vectors of high-dimensional samples with possibly different covariance matrices. `HDNRA` is also used to demonstrate the implementation of these tests, catering not only to the two-sample problem, but also to the general linear hypothesis testing (GLHT) problem. This package provides easy and user-friendly access to these tests. Both coded in C++ to allow for reasonable execution time using [Rcpp](https://github.com/RcppCore/Rcpp). Besides [Rcpp](https://github.com/RcppCore/Rcpp), the package has no strict dependencies in order to provide a stable self-contained toolbox that invites re-use.
+The R package **HDNRA** provides inverse-free high-dimensional location tests for two-sample and general linear hypothesis testing (GLHT) problems under equal or unequal covariance structures. It implements classical normal-approximation-based procedures, normal-reference tests based on covariance-matched Gaussian companions, and F-type normal-reference calibrations for heteroscedastic Behrens--Fisher and GLHT settings. Computationally intensive components are implemented in C++ through [Rcpp](https://github.com/RcppCore/Rcpp) and [RcppArmadillo](https://github.com/RcppCore/RcppArmadillo).
 
-There are: 
+Version 2.1.0 contains **24 public testing routines** and two real data sets.
 
-Two real data sets in `HDNRA`
+## Implemented data sets and testing routines
+
+Two real data sets in `HDNRA`:
 
 - [COVID19](https://nie23wp8738.github.io/HDNRA/reference/COVID19.html)
 - [corneal](https://nie23wp8738.github.io/HDNRA/reference/corneal.html)
 
-
-Seven normal-reference tests for the two-sample problem
+Seven normal-reference tests for the two-sample problem:
 
 - [ZGZC2020.TS.2cNRT](https://nie23wp8738.github.io/HDNRA/reference/ZGZC2020.TS.2cNRT.html)
 - [ZZ2022.TS.3cNRT](https://nie23wp8738.github.io/HDNRA/reference/ZZ2022.TS.3cNRT.html)
@@ -41,46 +43,52 @@ Seven normal-reference tests for the two-sample problem
 - [ZZGZ2021.TSBF.2cNRT](https://nie23wp8738.github.io/HDNRA/reference/ZZGZ2021.TSBF.2cNRT.html)
 - [ZZZ2023.TSBF.2cNRT](https://nie23wp8738.github.io/HDNRA/reference/ZZZ2023.TSBF.2cNRT.html)
 
-Five normal-reference tests for the GLHT problem in `HDNRA`
+Seven normal-reference tests for the GLHT/GLHTBF problem:
 
 - [ZGZ2017.GLHT.2cNRT](https://nie23wp8738.github.io/HDNRA/reference/ZGZ2017.GLHT.2cNRT.html)
 - [ZZ2022.GLHT.3cNRT](https://nie23wp8738.github.io/HDNRA/reference/ZZ2022.GLHT.3cNRT.html)
 - [ZZZ2022.GLHT.2cNRT](https://nie23wp8738.github.io/HDNRA/reference/ZZZ2022.GLHT.2cNRT.html)
 - [ZZ2022.GLHTBF.3cNRT](https://nie23wp8738.github.io/HDNRA/reference/ZZ2022.GLHTBF.3cNRT.html)
 - [ZZG2022.GLHTBF.2cNRT](https://nie23wp8738.github.io/HDNRA/reference/ZZG2022.GLHTBF.2cNRT.html)
+- [WZ2026.GLHTBF.2cNRT](https://nie23wp8738.github.io/HDNRA/reference/WZ2026.GLHTBF.2cNRT.html)
+- [CCXH2024.GLHTBF.2cNRT](https://nie23wp8738.github.io/HDNRA/reference/CCXH2024.GLHTBF.2cNRT.html)
 
-Four existing tests for the two-sample problem in `HDNRA`
+Four normal-approximation-based tests for the two-sample problem:
 
 - [BS1996.TS.NABT](https://nie23wp8738.github.io/HDNRA/reference/BS1996.TS.NABT.html)
 - [SD2008.TS.NABT](https://nie23wp8738.github.io/HDNRA/reference/SD2008.TS.NABT.html)
 - [CQ2010.TSBF.NABT](https://nie23wp8738.github.io/HDNRA/reference/CQ2010.TSBF.NABT.html)
 - [SKK2013.TSBF.NABT](https://nie23wp8738.github.io/HDNRA/reference/SKK2013.TSBF.NABT.html)
 
-Five existing tests for the GLHT problem in `HDNRA`
+Six normal-approximation-based and benchmark tests for the GLHT/GLHTBF problem:
 
 - [FHW2004.GLHT.NABT](https://nie23wp8738.github.io/HDNRA/reference/FHW2004.GLHT.NABT.html)
 - [SF2006.GLHT.NABT](https://nie23wp8738.github.io/HDNRA/reference/SF2006.GLHT.NABT.html)
 - [YS2012.GLHT.NABT](https://nie23wp8738.github.io/HDNRA/reference/YS2012.GLHT.NABT.html)
 - [ZGZ2017.GLHTBF.NABT](https://nie23wp8738.github.io/HDNRA/reference/ZGZ2017.GLHTBF.NABT.html)
 - [S2007.ks.NABT](https://nie23wp8738.github.io/HDNRA/reference/S2007.ks.NABT.html)
-
+- [LHNB2025.GLHTBF.NABT](https://nie23wp8738.github.io/HDNRA/reference/LHNB2025.GLHTBF.NABT.html)
 
 ## Installation
 
-You can install and load the most recent development version of `HDNRA` from [GitHub](https://github.com/) with:
+Install the CRAN release with:
 
 ``` r
-# Installing from GitHub requires you first install the devtools or remotes package
+install.packages("HDNRA")
+```
+
+You can also install the development version from [GitHub](https://github.com/):
+
+``` r
+# Installing from GitHub requires devtools or remotes.
 install.packages("devtools")
-# Or
+# Or:
 install.packages("remotes")
 
-# install the most recent development version from GitHub
+# Install the development version from GitHub.
 devtools::install_github("nie23wp8738/HDNRA")
-# Or
+# Or:
 remotes::install_github("nie23wp8738/HDNRA")
-# load the most recent development version from GitHub
-library(HDNRA)
 ```
 
 ## Usage
@@ -96,64 +104,87 @@ library(HDNRA)
 Package `HDNRA` comes with two real data sets:
 
 ```{r}
-# A COVID19 data set from NCBI with ID GSE152641 for the two-sample problem.
+# A COVID-19 transcriptomic data set for the two-sample problem.
 ?COVID19
 data(COVID19)
 dim(COVID19)
-group1 <- as.matrix(COVID19[c(2:19, 82:87), ]) ## healthy group
+
+group1 <- as.matrix(COVID19[c(2:19, 82:87), ])      # healthy controls
+group2 <- as.matrix(COVID19[-c(1:19, 82:87), ])     # COVID-19 patients
+
 dim(group1)
-group2 <- as.matrix(COVID19[-c(1:19, 82:87), ]) ## COVID-19 patients
 dim(group2)
 
-# A corneal data set acquired during a keratoconus study for the GLHT problem.
+# A corneal topography data set for the GLHT problem.
 ?corneal
 data(corneal)
 dim(corneal)
-group1 <- as.matrix(corneal[1:43, ]) ## normal group
+
+group1 <- as.matrix(corneal[1:43, ])      # normal group
+group2 <- as.matrix(corneal[44:57, ])     # unilateral suspect group
+group3 <- as.matrix(corneal[58:78, ])     # suspect map group
+group4 <- as.matrix(corneal[79:150, ])    # clinical keratoconus group
+
 dim(group1)
-group2 <- as.matrix(corneal[44:57, ]) ## unilateral suspect group
 dim(group2)
-group3 <- as.matrix(corneal[58:78, ]) ## suspect map group
 dim(group3)
-group4 <- as.matrix(corneal[79:150, ]) ## clinical keratoconus group
 dim(group4)
 ```
 
-### Example for two-sample problem
+### Example for the two-sample problem
 
-A simple example of how to use one of the normal-reference tests `ZWZ2023.TSBF.2cNRT` using data set `COVID19`:
+A simple example using the F-type normal-reference Behrens--Fisher test `ZWZ2023.TSBF.2cNRT()` with the `COVID19` data set:
 
 ```{r}
 data("COVID19")
-group1 <- as.matrix(COVID19[c(2:19, 82:87), ]) # healthy group1
-group2 <- as.matrix(COVID19[-c(1:19, 82:87), ]) # patients group2
-# The data matrix for tsbf_zwz2023 should be p by n, sometimes we should transpose the data matrix
+
+group1 <- as.matrix(COVID19[c(2:19, 82:87), ])
+group2 <- as.matrix(COVID19[-c(1:19, 82:87), ])
+
 ZWZ2023.TSBF.2cNRT(group1, group2)
 ```
 
-### Example for GLHT problem
+### Example for the GLHT problem
 
-A simple example of how to use one of the normal-reference tests `ZZG2022.GLHTBF.2cNRT` using data set `corneal`:
+A simple example using the F-type normal-reference GLHTBF test `WZ2026.GLHTBF.2cNRT()` with the `corneal` data set:
 
 ```{r}
 data("corneal")
-dim(corneal)
-group1 <- as.matrix(corneal[1:43, ]) ## normal group
-group2 <- as.matrix(corneal[44:57, ]) ## unilateral suspect group
-group3 <- as.matrix(corneal[58:78, ]) ## suspect map group
-group4 <- as.matrix(corneal[79:150, ]) ## clinical keratoconus group
-p <- dim(corneal)[2]
-Y <- list()
-k <- 4
-Y[[1]] <- group1
-Y[[2]] <- group2
-Y[[3]] <- group3
-Y[[4]] <- group4
-n <- c(nrow(Y[[1]]),nrow(Y[[2]]),nrow(Y[[3]]),nrow(Y[[4]]))
-G <- cbind(diag(k-1),rep(-1,k-1))
-ZZG2022.GLHTBF.2cNRT(Y,G,n,p)
+
+group1 <- as.matrix(corneal[1:43, ])
+group2 <- as.matrix(corneal[44:57, ])
+group3 <- as.matrix(corneal[58:78, ])
+group4 <- as.matrix(corneal[79:150, ])
+
+Y <- list(group1, group2, group3, group4)
+k <- length(Y)
+n <- vapply(Y, nrow, integer(1))
+p <- ncol(Y[[1]])
+
+# Omnibus one-way contrast against the last group.
+G <- cbind(diag(k - 1), rep(-1, k - 1))
+
+WZ2026.GLHTBF.2cNRT(Y, G, n, p)
+```
+
+A rank-one heteroscedastic GLHTBF example can be run with `CCXH2024.GLHTBF.2cNRT()`:
+
+```{r}
+B <- c(-2, 1, 2, -1)
+CCXH2024.GLHTBF.2cNRT(Y, B, n, p, alpha = 0.05)
+```
+
+The random-integration normal-approximation GLHTBF routine `LHNB2025.GLHTBF.NABT()` uses a rank-one coefficient vector and tuning vectors `O` and `A`:
+
+```{r}
+B <- c(-2, 1, 2, -1)
+A <- rep(sqrt(5) * p^(-3 / 8), p)
+eps <- 2
+O <- sqrt(eps * (1 + 2 * (1:p) / (3 * p)))
+
+LHNB2025.GLHTBF.NABT(Y, B, O, A, n, p)
 ```
 
 ## Code of Conduct
-  
-  Please note that the HDNRA project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms
+
+Please note that the HDNRA project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
