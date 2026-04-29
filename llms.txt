@@ -1,0 +1,291 @@
+# HDNRA
+
+The R package **HDNRA** provides inverse-free high-dimensional location
+tests for two-sample and general linear hypothesis testing (GLHT)
+problems under equal or unequal covariance structures. It implements
+classical normal-approximation-based procedures, normal-reference tests
+based on covariance-matched Gaussian companions, and F-type
+normal-reference calibrations for heteroscedastic Behrens–Fisher and
+GLHT settings. Computationally intensive components are implemented in
+C++ through [Rcpp](https://github.com/RcppCore/Rcpp) and
+[RcppArmadillo](https://github.com/RcppCore/RcppArmadillo).
+
+Version 2.1.0 contains **24 public testing routines** and two real data
+sets.
+
+## Implemented data sets and testing routines
+
+Two real data sets in `HDNRA`:
+
+- [COVID19](https://nie23wp8738.github.io/HDNRA/reference/COVID19.html)
+- [corneal](https://nie23wp8738.github.io/HDNRA/reference/corneal.html)
+
+Seven normal-reference tests for the two-sample problem:
+
+- [ZGZC2020.TS.2cNRT](https://nie23wp8738.github.io/HDNRA/reference/ZGZC2020.TS.2cNRT.html)
+- [ZZ2022.TS.3cNRT](https://nie23wp8738.github.io/HDNRA/reference/ZZ2022.TS.3cNRT.html)
+- [ZZZ2020.TS.2cNRT](https://nie23wp8738.github.io/HDNRA/reference/ZZZ2020.TS.2cNRT.html)
+- [ZWZ2023.TSBF.2cNRT](https://nie23wp8738.github.io/HDNRA/reference/ZWZ2023.TSBF.2cNRT.html)
+- [ZZ2022.TSBF.3cNRT](https://nie23wp8738.github.io/HDNRA/reference/ZZ2022.TSBF.3cNRT.html)
+- [ZZGZ2021.TSBF.2cNRT](https://nie23wp8738.github.io/HDNRA/reference/ZZGZ2021.TSBF.2cNRT.html)
+- [ZZZ2023.TSBF.2cNRT](https://nie23wp8738.github.io/HDNRA/reference/ZZZ2023.TSBF.2cNRT.html)
+
+Seven normal-reference tests for the GLHT/GLHTBF problem:
+
+- [ZGZ2017.GLHT.2cNRT](https://nie23wp8738.github.io/HDNRA/reference/ZGZ2017.GLHT.2cNRT.html)
+- [ZZ2022.GLHT.3cNRT](https://nie23wp8738.github.io/HDNRA/reference/ZZ2022.GLHT.3cNRT.html)
+- [ZZZ2022.GLHT.2cNRT](https://nie23wp8738.github.io/HDNRA/reference/ZZZ2022.GLHT.2cNRT.html)
+- [ZZ2022.GLHTBF.3cNRT](https://nie23wp8738.github.io/HDNRA/reference/ZZ2022.GLHTBF.3cNRT.html)
+- [ZZG2022.GLHTBF.2cNRT](https://nie23wp8738.github.io/HDNRA/reference/ZZG2022.GLHTBF.2cNRT.html)
+- [WZ2026.GLHTBF.2cNRT](https://nie23wp8738.github.io/HDNRA/reference/WZ2026.GLHTBF.2cNRT.html)
+- [CCXH2024.GLHTBF.2cNRT](https://nie23wp8738.github.io/HDNRA/reference/CCXH2024.GLHTBF.2cNRT.html)
+
+Four normal-approximation-based tests for the two-sample problem:
+
+- [BS1996.TS.NABT](https://nie23wp8738.github.io/HDNRA/reference/BS1996.TS.NABT.html)
+- [SD2008.TS.NABT](https://nie23wp8738.github.io/HDNRA/reference/SD2008.TS.NABT.html)
+- [CQ2010.TSBF.NABT](https://nie23wp8738.github.io/HDNRA/reference/CQ2010.TSBF.NABT.html)
+- [SKK2013.TSBF.NABT](https://nie23wp8738.github.io/HDNRA/reference/SKK2013.TSBF.NABT.html)
+
+Six normal-approximation-based and benchmark tests for the GLHT/GLHTBF
+problem:
+
+- [FHW2004.GLHT.NABT](https://nie23wp8738.github.io/HDNRA/reference/FHW2004.GLHT.NABT.html)
+- [SF2006.GLHT.NABT](https://nie23wp8738.github.io/HDNRA/reference/SF2006.GLHT.NABT.html)
+- [YS2012.GLHT.NABT](https://nie23wp8738.github.io/HDNRA/reference/YS2012.GLHT.NABT.html)
+- [ZGZ2017.GLHTBF.NABT](https://nie23wp8738.github.io/HDNRA/reference/ZGZ2017.GLHTBF.NABT.html)
+- [S2007.ks.NABT](https://nie23wp8738.github.io/HDNRA/reference/S2007.ks.NABT.html)
+- [LHNB2025.GLHTBF.NABT](https://nie23wp8738.github.io/HDNRA/reference/LHNB2025.GLHTBF.NABT.html)
+
+## Installation
+
+Install the CRAN release with:
+
+``` r
+install.packages("HDNRA")
+```
+
+You can also install the development version from
+[GitHub](https://github.com/):
+
+``` r
+# Installing from GitHub requires devtools or remotes.
+install.packages("devtools")
+# Or:
+install.packages("remotes")
+
+# Install the development version from GitHub.
+devtools::install_github("nie23wp8738/HDNRA")
+# Or:
+remotes::install_github("nie23wp8738/HDNRA")
+```
+
+## Usage
+
+### Load the package
+
+``` r
+library(HDNRA)
+```
+
+### Example data
+
+Package `HDNRA` comes with two real data sets:
+
+``` r
+# A COVID-19 transcriptomic data set for the two-sample problem.
+?COVID19
+data(COVID19)
+dim(COVID19)
+
+group1 <- as.matrix(COVID19[c(2:19, 82:87), ])      # healthy controls
+group2 <- as.matrix(COVID19[-c(1:19, 82:87), ])     # COVID-19 patients
+
+dim(group1)
+dim(group2)
+
+# A corneal topography data set for the GLHT problem.
+?corneal
+data(corneal)
+dim(corneal)
+
+group1 <- as.matrix(corneal[1:43, ])      # normal group
+group2 <- as.matrix(corneal[44:57, ])     # unilateral suspect group
+group3 <- as.matrix(corneal[58:78, ])     # suspect map group
+group4 <- as.matrix(corneal[79:150, ])    # clinical keratoconus group
+
+dim(group1)
+dim(group2)
+dim(group3)
+dim(group4)
+```
+
+### Example for the two-sample problem
+
+A simple example using the F-type normal-reference Behrens–Fisher test
+[`ZWZ2023.TSBF.2cNRT()`](reference/ZWZ2023.TSBF.2cNRT.md) with the
+`COVID19` data set:
+
+``` r
+data("COVID19")
+
+group1 <- as.matrix(COVID19[c(2:19, 82:87), ])
+group2 <- as.matrix(COVID19[-c(1:19, 82:87), ])
+
+ZWZ2023.TSBF.2cNRT(group1, group2)
+```
+
+### Example for the GLHT problem
+
+A simple example using the F-type normal-reference GLHTBF test
+[`WZ2026.GLHTBF.2cNRT()`](reference/WZ2026.GLHTBF.2cNRT.md) with the
+`corneal` data set:
+
+``` r
+data("corneal")
+
+group1 <- as.matrix(corneal[1:43, ])
+group2 <- as.matrix(corneal[44:57, ])
+group3 <- as.matrix(corneal[58:78, ])
+group4 <- as.matrix(corneal[79:150, ])
+
+Y <- list(group1, group2, group3, group4)
+k <- length(Y)
+n <- vapply(Y, nrow, integer(1))
+p <- ncol(Y[[1]])
+
+# Omnibus one-way contrast against the last group.
+G <- cbind(diag(k - 1), rep(-1, k - 1))
+
+WZ2026.GLHTBF.2cNRT(Y, G, n, p)
+```
+
+A rank-one heteroscedastic GLHTBF example can be run with
+[`CCXH2024.GLHTBF.2cNRT()`](reference/CCXH2024.GLHTBF.2cNRT.md):
+
+``` r
+B <- c(-2, 1, 2, -1)
+CCXH2024.GLHTBF.2cNRT(Y, B, n, p, alpha = 0.05)
+```
+
+The random-integration normal-approximation GLHTBF routine
+[`LHNB2025.GLHTBF.NABT()`](reference/LHNB2025.GLHTBF.NABT.md) uses a
+rank-one coefficient vector and tuning vectors `O` and `A`:
+
+``` r
+B <- c(-2, 1, 2, -1)
+A <- rep(sqrt(5) * p^(-3 / 8), p)
+eps <- 2
+O <- sqrt(eps * (1 + 2 * (1:p) / (3 * p)))
+
+LHNB2025.GLHTBF.NABT(Y, B, O, A, n, p)
+```
+
+## Code of Conduct
+
+Please note that the HDNRA project is released with a [Contributor Code
+of
+Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
+
+# Package index
+
+## Data Sets
+
+- [`COVID19`](COVID19.md) : HDNRA_data COVID19
+- [`corneal`](corneal.md) : HDNRA_data corneal
+
+## S3 class ‘NRtest’
+
+- [`NRtest.object()`](NRtest.object.md) : S3 Class "NRtest"
+- [`print(`*`<NRtest>`*`)`](print.NRtest.md) : Print Method for S3 Class
+  "NRtest"
+
+## Normal-refernece Tests for Two-sample Problem
+
+- [`ZGZC2020.TS.2cNRT()`](ZGZC2020.TS.2cNRT.md) : Normal-reference-test
+  with two-cumulant (2-c) matched \$\chi^2\$-approximation for
+  two-sample problem proposed by Zhang et al. (2020)
+- [`ZWZ2023.TSBF.2cNRT()`](ZWZ2023.TSBF.2cNRT.md) :
+  Normal-reference-test with two-cumulant (2-c) matched
+  \$\chi^2\$-approximation for two-sample BF problem proposed by Zhu et
+  al. (2023)
+- [`ZZ2022.TS.3cNRT()`](ZZ2022.TS.3cNRT.md) : Normal-reference-test with
+  three-cumulant (3-c) matched \$\chi^2\$-approximation for two-sample
+  problem proposed by Zhang and Zhu (2022)
+- [`ZZ2022.TSBF.3cNRT()`](ZZ2022.TSBF.3cNRT.md) : Normal-reference-test
+  with three-cumulant (3-c) matched \$\chi^2\$-approximation for
+  two-sample BF problem proposed by Zhang and Zhu (2022)
+- [`ZZGZ2021.TSBF.2cNRT()`](ZZGZ2021.TSBF.2cNRT.md) :
+  Normal-reference-test with two-cumulant (2-c) matched
+  \$\chi^2\$-approximation for two-sample BF problem proposed by Zhang
+  et al. (2021)
+- [`ZZZ2020.TS.2cNRT()`](ZZZ2020.TS.2cNRT.md) : Normal-reference-test
+  with two-cumulant (2-c) matched \$\chi^2\$-approximation for
+  two-sample problem proposed by Zhang et al. (2020)
+- [`ZZZ2023.TSBF.2cNRT()`](ZZZ2023.TSBF.2cNRT.md) :
+  Normal-reference-test with two-cumulant (2-c) matched
+  \$\chi^2\$-approximation for two-sample BF problem proposed by Zhang
+  et al. (2023)
+
+## Normal-refernece Tests for GLHT Problem
+
+- [`CCXH2024.GLHTBF.2cNRT()`](CCXH2024.GLHTBF.2cNRT.md) :
+  Normal-reference-test with two-cumulant (2-c) matched
+  \$\chi^2\$-approximation for GLHT problem proposed by Cao et al.
+  (2024)
+- [`ZGZ2017.GLHT.2cNRT()`](ZGZ2017.GLHT.2cNRT.md) :
+  Normal-reference-test with two-cumulant (2-c) matched
+  \$\chi^2\$-approximation for GLHT problem proposed Zhang et al. (2017)
+- [`ZZ2022.GLHT.3cNRT()`](ZZ2022.GLHT.3cNRT.md) : Normal-reference-test
+  with three-cumulant (3-c) matched \$\chi^2\$-approximation for GLHT
+  problem proposed by Zhu and Zhang (2022)
+- [`ZZ2022.GLHTBF.3cNRT()`](ZZ2022.GLHTBF.3cNRT.md) :
+  Normal-reference-test with three-cumulant (3-c) matched
+  \$\chi^2\$-approximation for GLHT problem under heteroscedasticity
+  proposed by Zhang and Zhu (2022)
+- [`ZZG2022.GLHTBF.2cNRT()`](ZZG2022.GLHTBF.2cNRT.md) :
+  Normal-reference-test with two-cumulant (2-c) matched
+  \$\chi^2\$-approximation for GLHT problem under heteroscedasticity
+  proposed by Zhang et al. (2022)
+- [`ZZZ2022.GLHT.2cNRT()`](ZZZ2022.GLHT.2cNRT.md) :
+  Normal-reference-test with two-cumulant (2-c) matched
+  \$\chi^2\$-approximation for GLHT problem proposed by Zhu et al.
+  (2022)
+
+## Some Existing Tests for Two-sample Problem
+
+- [`BS1996.TS.NABT()`](BS1996.TS.NABT.md) : Normal-approximation-based
+  test for two-sample problem proposed by Bai and Saranadasa (1996)
+- [`CQ2010.TSBF.NABT()`](CQ2010.TSBF.NABT.md) :
+  Normal-approximation-based test for two-sample BF problem proposed by
+  Chen and Qin (2010)
+- [`SD2008.TS.NABT()`](SD2008.TS.NABT.md) : Normal-approximation-based
+  test for two-sample problem proposed by Srivastava and Du (2008)
+- [`SKK2013.TSBF.NABT()`](SKK2013.TSBF.NABT.md) :
+  Normal-approximation-based test for two-sample BF problem proposed by
+  Srivastava et al. (2013)
+
+## Some Existing Tests for GLHT Problem
+
+- [`FHW2004.GLHT.NABT()`](FHW2004.GLHT.NABT.md) :
+  Normal-approximation-based test for GLHT problem proposed by Fujikoshi
+  et al. (2004)
+- [`LHNB2025.GLHTBF.NABT()`](LHNB2025.GLHTBF.NABT.md) :
+  Normal-approximation-based test for k-sample linear hypothesis via
+  random integration proposed by Li et al. (2025)
+- [`S2007.ks.NABT()`](S2007.ks.NABT.md) : Normal-approximation-based
+  test for one-way MANOVA problem proposed by Schott (2007)
+- [`SF2006.GLHT.NABT()`](SF2006.GLHT.NABT.md) :
+  Normal-approximation-based test for GLHT problem proposed by
+  Srivastava and Fujikoshi (2006)
+- [`WZ2026.GLHTBF.2cNRT()`](WZ2026.GLHTBF.2cNRT.md) :
+  F-approximation-based F-type test for GLHT problem under
+  heteroscedasticity
+- [`YS2012.GLHT.NABT()`](YS2012.GLHT.NABT.md) :
+  Normal-approximation-based test for GLHT problem proposed by Yamada
+  and Srivastava (2012)
+- [`ZGZ2017.GLHTBF.NABT()`](ZGZ2017.GLHTBF.NABT.md) :
+  Normal-approximation-based test for GLHT problem under
+  heteroscedasticity proposed by Zhou et al. (2017)
+
